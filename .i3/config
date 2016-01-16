@@ -153,8 +153,6 @@ for_window [title="Library"] border normal
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -195,6 +193,23 @@ bar {
 		urgent_workspace	$bg-urgent-colour	$bg-urgent-colour	$text-inactive-colour
 	}
 }
+
+#Power Management, borrowed from Arch wiki https://wiki.archlinux.org/index.php/I3#Shutdown.2C_reboot.2C_lock_screen
+set $Locker i3lock && sleep 1
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Escape
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+e mode "$mode_system"
 
 bindsym $mod+shift+x exec i3lock -i /home/william/Downloads/1.png
 exec_always --no-startup-id feh --bg-scale /home/william/Downloads/1.png
