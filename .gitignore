@@ -1,0 +1,12 @@
+#I only want to include some very specific files so start with ignore everything
+*
+
+#Exclude some top level files
+!.bash_alaises
+!.bashrc
+!.gitignore
+!.profile
+!.zshrc
+
+#Exclude some folders and their contents
+!.i3/*
