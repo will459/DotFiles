@@ -7,6 +7,7 @@
 !.gitignore
 !.profile
 !.zshrc
+!.conkyrc
 
 #Exclude some folders and their contents
 !.i3/*
