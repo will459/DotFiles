@@ -1,0 +1,86 @@
+# Conky, a system monitor, based on torsmo
+#
+# Any original torsmo code is licensed under the BSD license
+#
+# All code written since the fork of torsmo is licensed under the GPL
+#
+# Please see COPYING for details
+#
+# Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+# Copyright (c) 2005-2010 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+# All rights reserved.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+alignment top_right
+background yes
+border_width 1
+cpu_avg_samples 4
+default_color bf0000
+color1 grey
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+use_xft yes
+xftfont DejaVu Sans Mono:size=12
+gap_x 5
+gap_y 60
+minimum_size 5 5
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window yes
+double_buffer yes
+own_window_class Conky
+own_window_type override
+own_window_transparent yes
+stippled_borders 0
+update_interval 1.0
+uppercase no
+use_spacer none
+show_graph_scale no
+show_graph_range no
+
+TEXT
+$nodename
+$hr
+$color1 Uptime:$color $uptime
+$color1 Processes:$color $processes  $color1 Running:$color $running_processes
+$hr
+$color1 AMD FX-8320
+CPU Usage:$color $cpu%
+$color1 Frequency (in GHz):$color $freq_g
+${cpugraph}
+$hr
+$color1 NVidia GeForce 760 2GB
+GPU Temp:$color ${nvidia temp} / ${nvidia threshold}
+$hr
+$color1 RAM Usage:$color $mem/$memmax - $memperc%
+$color1 Swap Usage:$color $swap/$swapmax - $swapperc%
+${memgraph}
+$hr
+$color1 File system:
+		$color${fs_used /}/${fs_size /} ${fs_bar 6 /}
+		$color1 Read:$color $diskio_read
+		$color1 Write:$color $diskio_write
+$hr
+$color1 Networking:
+  IP: ${addr eth0}
+  Up:$color ${upspeed eth0} $color1 , $color $totalup $color1}
+  Down:$color ${downspeed eth0} $color1, $color $totaldown
