@@ -19,5 +19,5 @@ fi
 # set PATH so it includes user's private bin if it exists
 #Adding current directory (.) to PATH is dangerous but I do it anyway
 if [ -d "$HOME/bin" ] ; then
-    PATH=".:$HOME/bin:$PATH"
+    PATH="$HOME/bin:$PATH:."
 fi
