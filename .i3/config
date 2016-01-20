@@ -9,6 +9,12 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+#This config file works best using a dark GTK theme
+#My preference is Arc (https://github.com/horst3180) or
+#Radiance-Flat-Blue #(http://www.ravefinity.com/p/download-ambiance-radiance-flat-colors.html)
+#Many thanks to Code Cast (https://www.youtube.com/channel/UCcQsDUZiK1GWDcP7BpVO_kw) whose config
+#this is based on
+
 set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -136,6 +142,7 @@ set $bg-inactive-colour		#2f343f
 set $bg-urgent-colour		#E53935
 set $text-colour		#f3f4f5
 set $text-inactive-colour	#676E7D
+set $text-urgent-colour  #ffffff
 
 #Window colours
 #Type			Border			Background		Text			Indicator bar
@@ -195,12 +202,12 @@ bar {
 		#Type			Border			Background		Text
 		focused_workspace	$bg-colour		$bg-colour		$text-colour
 		inactive_workspace	$bg-inactive-colour	$bg-inactive-colour	$text-inactive-colour
-		urgent_workspace	$bg-urgent-colour	$bg-urgent-colour	$text-inactive-colour
+		urgent_workspace	$bg-urgent-colour	$bg-urgent-colour	$text-urgent-colour
 	}
 }
 
 #Power Management, borrowed from Arch wiki https://wiki.archlinux.org/index.php/I3#Shutdown.2C_reboot.2C_lock_screen
-set $Locker i3lock && sleep 1
+set $Locker i3lock -i /home/william/Pictures/bg.png && sleep 1
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -216,5 +223,5 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
-bindsym $mod+shift+x exec i3lock -i /home/william/Downloads/1.png
-exec_always --no-startup-id feh --bg-scale /home/william/Downloads/1.png
+exec_always --no-startup-id feh --bg-scale /home/william/Pictures/bg.png
+exec compton -f
