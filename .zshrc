@@ -40,10 +40,9 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 #Export PATH with bin
 #adding current directory (.) is dangerous but I do it anyway
-export PATH=.:$HOME/bin:$PATH
+export PATH=$HOME/bin:$PATH:.
 
 #colour LS and others
-alias ls='ls --color=auto'
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
@@ -51,5 +50,4 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias gcc='gcc -Wall'
-alias g++='g++ -Wall'
+[[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
