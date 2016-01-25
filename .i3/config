@@ -159,6 +159,7 @@ for_window [class="Firefox"] border none
 for_window [class="Iceweasel"] border none
 for_window [title="Library"] border normal
 for_window [class="Atom"] border none
+for_window [class="Guake"] floating enable
 
 
 # reload the configuration file
@@ -224,4 +225,6 @@ mode "$mode_system" {
 bindsym $mod+Shift+e mode "$mode_system"
 
 exec_always --no-startup-id feh --bg-scale /home/william/Pictures/bg.png
+exec_always --no-startup-id conky
+exec_always --no-startup-id guake
 exec compton -f
