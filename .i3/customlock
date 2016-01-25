@@ -1,0 +1,21 @@
+#!/bin/bash
+TMPIMG=$RANDOM.png
+TMPIMG2=$RANDOM.png
+ICON=$HOME/Pictures/Icons/lock.png
+SCALE=4 #SCALE=4 means scale down to 1/4 then scale back to 1
+
+echo `awk "BEGIN {printf \"%.2f\", 1/$SCALE*100}"`
+echo `expr $SCALE \* 100`
+
+scrot $TMPIMG
+convert $TMPIMG -scale `awk "BEGIN {printf \"%.2f\", 1/$SCALE*100}"`% -scale `expr $SCALE \* 100`% $TMPIMG #Reduces is 10x then restores, pixelates it.
+convert $TMPIMG $ICON -gravity center -composite -matte $TMPIMG #If input file exists embed it
+
+#Add text to the lock screen
+convert -size 1920x60 xc:black -font Liberation-Sans -pointsize 26 -fill white -gravity center -annotate +0+0 'Type password to unlock' $TMPIMG2
+
+convert $TMPIMG $TMPIMG2 -gravity center -geometry +0+300 -composite $TMPIMG
+
+i3lock -u -i $TMPIMG
+rm $TMPIMG
+rm $TMPIMG2
