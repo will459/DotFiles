@@ -207,7 +207,7 @@ bar {
 }
 
 #Power Management, borrowed from Arch wiki https://wiki.archlinux.org/index.php/I3#Shutdown.2C_reboot.2C_lock_screen
-set $Locker i3lock -i /home/william/Pictures/bg.png && sleep 1
+set $Locker /home/william/.i3/customlock && sleep 1
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
