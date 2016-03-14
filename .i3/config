@@ -99,9 +99,12 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $workspace1 "1: Main"
-set $workspace2 "2: Terminals"
-set $workspace3 "3: Atom"
+set $workspace2 "2: Atom"
+set $workspace3 "3: Media"
 set $workspace4 "4: Web"
+set $workspace8 "8: Steam"
+set $workspace9 "9: Steam Friends"
+set $workspace10 "10: Music"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -111,9 +114,9 @@ bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -123,15 +126,20 @@ bindsym $mod+Shift+4 move container to workspace $workspace4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
 
-#Set workspace program defaults (class found in xprop
+#Set workspace program defaults (class found in xprop)
 assign [class="Firefox"] $workspace4
 assign [class="Iceweasel"] $workspace4
-assign [class="konsole"] $workspace2
-assign [class="Atom"] $workspace3
+assign [class="Atom"] $workspace2
+assign [class="mpv"] $workspace4
+assign [class="Steam" title="Steam"] $workspace8
+assign [class="Steam" title="Friends"] $workspace9
+
+#Move to workspace to avoid "urgent" warning
+for_window [class="Clementine"] move workspace $workspace10
 
 #Set behaviour by window name
 for_window [title="Library"] floating enable #Firefox "download" window
@@ -160,7 +168,7 @@ for_window [class="Iceweasel"] border none
 for_window [title="Library"] border normal
 for_window [class="Atom"] border none
 for_window [class="Guake"] floating enable
-
+for_window [class="clementine"] border none
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -197,6 +205,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3blocks -c ~/.i3/i3blocks.conf
+	
 	colors {
 		background $bg-colour
 		separator #757575
@@ -224,7 +233,23 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
+#Media key binds
+#http://wiki.linuxquestions.org/wiki/XF86_keyboard_symbols
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 2 toggle # mute sound
+bindsym XF86Music exec --no-startup-id clementine --play
+bindsym XF86AudioPlay exec clementine --play-pause
+bindsym XF86AudioNext exec clementine --next
+bindsym XF86AudioPrev exec clementine --prev
+bindsym XF86Calculator exec pavucontrol
+
 exec_always --no-startup-id feh --bg-scale /home/william/Pictures/bg.png
 exec_always --no-startup-id conky
 exec_always --no-startup-id guake
 exec compton -f
+
+exec xset b off
+exec xset m 1
+exec xset s 3600 3600
+exec xset dpms 3600 3600 3600
