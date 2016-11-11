@@ -1,0 +1,11 @@
+"*":
+  core:
+    autoHideMenuBar: true
+  editor:
+    atomicSoftTabs: false
+    scrollPastEnd: true
+    tabType: "soft"
+  "exception-reporting":
+    userId: "64b86f52-fec6-4a8b-5d7f-2fd96dbc0b4c"
+  welcome:
+    showOnStartup: false
