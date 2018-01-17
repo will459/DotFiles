@@ -6,7 +6,8 @@ promptinit
 
 PROMPT="$fg[red]%n$fg[cyan]@$fg[green]%~ $reset_color> "
 
-setopt histignorealldups sharehistory extendedglob
+setopt histignorealldups sharehistory extendedglob inc_append_history
+unsetopt autocd beep notify
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
